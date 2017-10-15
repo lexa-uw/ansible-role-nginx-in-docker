@@ -53,5 +53,6 @@
             - "{{dir}}/mnt/etc/nginx/ssl:/etc/nginx/ssl:ro"
             - "{{dir}}/mnt/var/log/nginx:/var/log/nginx"
             - "{{dir}}/mnt/var/www/html:/var/www/html"
+            - /etc/letsencrypt:/etc/letsencrypt:ro
 
       - meta: flush_handlers
