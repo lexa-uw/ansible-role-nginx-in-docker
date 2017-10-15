@@ -1,5 +1,5 @@
 stages:
-  - setup_runner
+  - setup
 
 cache:
   paths:
@@ -7,7 +7,7 @@ cache:
     - tmp
 
 setup:
-  stage: setup_runner
+  stage: setup
   tags: [docker]
   after_script:
     - docker run --rm -v `pwd`:/mnt busybox chown -R `id -u` /mnt/
