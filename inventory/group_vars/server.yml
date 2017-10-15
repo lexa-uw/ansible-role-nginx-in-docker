@@ -1,0 +1,5 @@
+dir: "{{ ansible_env.HOME }}/docker/nginx"
+container:
+  ports:
+    http: 880
+    https: 8443

@@ -1,0 +1,11 @@
+# vim:ft=nginx
+
+auth_basic           "Restricted";
+auth_basic_user_file conf.d/htpasswd;
+
+# RU/Ekb
+allow 212.49.114.210;
+allow 5.172.28.21;
+
+deny  all;
+satisfy any;
