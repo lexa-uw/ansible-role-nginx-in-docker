@@ -13,5 +13,5 @@ setup:
     - docker run --rm -v `pwd`:/mnt busybox chown -R `id -u` /mnt/
   script:
     - echo "$SSH_PRIVATE_KEY" > id_rsa
-    - docker run --rm -w /var/www -v `pwd`:/var/www -v `pwd`/id_rsa:/root/.ssh/id_rsa:ro lexauw/ansible-alpine ansible-galaxy -r requirements.yml install
+    # - docker run --rm -w /var/www -v `pwd`:/var/www -v `pwd`/id_rsa:/root/.ssh/id_rsa:ro lexauw/ansible-alpine ansible-galaxy -r requirements.yml install
     - docker run --rm -w /var/www -v `pwd`:/var/www -v `pwd`/id_rsa:/root/.ssh/id_rsa:ro lexauw/ansible-alpine ansible-playbook playbook.yml
