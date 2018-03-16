@@ -1,0 +1,22 @@
+---
+- name: Bring up two linked docker containers
+  hosts: localhost
+  vars:
+    inventory:
+      - name: docker
+        image: "python:2.7-stretch"
+  roles:
+    - role: provision_docker
+      provision_docker_inventory: "{{ inventory }}"
+      provision_docker_use_docker_connection: true
+
+- hosts: [docker]
+  become: true
+  tasks:
+    - ping:
+    - name: Run on scratch
+      include_role:
+        name: app
+    - name: Run on setupped
+      include_role:
+        name: app
