@@ -1,0 +1,3 @@
+nginx:
+  # For faster run of tests
+  openssl_dhparam_numbits: 8
