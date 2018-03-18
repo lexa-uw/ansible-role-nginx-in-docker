@@ -11,7 +11,6 @@
       provision_docker_use_docker_connection: true
 
 - hosts: [docker]
-  become: true
   tasks:
     - ping:
     - name: Run on scratch
