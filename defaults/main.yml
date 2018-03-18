@@ -5,5 +5,6 @@ nginx:
       http: 80
       https: 443
   dir: "{{ ansible_env.HOME }}/docker/nginx"
+  docker_container_volumes: []
   htpasswd: []
   openssl_dhparam_numbits: 4096

@@ -40,13 +40,13 @@
     ports:
       - "{{nginx.container.ports.https}}:443"
       - "{{nginx.container.ports.http}}:80"
-    volumes:
-      - "{{nginx.dir}}/mnt/etc/nginx/conf.d:/etc/nginx/conf.d:ro"
-      - "{{nginx.dir}}/mnt/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"
-      - "{{nginx.dir}}/mnt/etc/nginx/ssl:/etc/nginx/ssl:ro"
-      - "{{nginx.dir}}/mnt/var/log/nginx:/var/log/nginx"
-      - "{{nginx.dir}}/mnt/var/www/html:/var/www/html"
-      - /etc/letsencrypt:/etc/letsencrypt:ro
+    volumes: "{{nginx.docker_container_volumes}} + [
+        '{{nginx.dir}}/mnt/etc/nginx/conf.d:/etc/nginx/conf.d:ro',
+        '{{nginx.dir}}/mnt/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro',
+        '{{nginx.dir}}/mnt/etc/nginx/ssl:/etc/nginx/ssl:ro',
+        '{{nginx.dir}}/mnt/var/log/nginx:/var/log/nginx',
+        '{{nginx.dir}}/mnt/var/www/html:/var/www/html'
+      ]"
   when: ansible_facts.virtualization_type != "docker"
 
 - meta: flush_handlers
