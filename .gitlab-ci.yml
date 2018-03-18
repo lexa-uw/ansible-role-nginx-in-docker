@@ -3,15 +3,12 @@ stages:
 
 cache:
   paths:
-    - roles
-    - tmp
+    - tests/roles
+    - var
 
 setup:
   stage: setup
   tags: [docker]
-  after_script:
-    - docker run --rm -v `pwd`:/mnt busybox chown -R `id -u` /mnt/
   script:
-    - echo "$SSH_PRIVATE_KEY" > id_rsa
-    # - docker run --rm -w /var/www -v `pwd`:/var/www -v `pwd`/id_rsa:/root/.ssh/id_rsa:ro lexauw/ansible-alpine ansible-galaxy -r requirements.yml install
-    - docker run --rm -w /var/www -v `pwd`:/var/www -v `pwd`/id_rsa:/root/.ssh/id_rsa:ro lexauw/ansible-alpine ansible-playbook playbook.yml
+    - ./tests/ops/bin/ansible ansible-galaxy install -r ./tests/requirements.yml --roles-path ./tests/roles/
+    - ./tests/ops/bin/ansible ansible-playbook tests/test.yml
