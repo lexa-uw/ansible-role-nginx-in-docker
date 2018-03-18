@@ -1,5 +1,5 @@
 ---
-- name: Bring up two linked docker containers
+- name: Bring up docker container
   hosts: localhost
   vars:
     inventory:

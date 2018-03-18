@@ -1,4 +1,5 @@
 dir: "{{ ansible_env.HOME }}/docker/nginx"
+
 container:
   ports:
     http: 80
