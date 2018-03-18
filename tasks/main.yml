@@ -14,7 +14,7 @@
   register: dhparam
 
 - name: Diffie-Hellman parameter for DHE ciphersuites
-  shell: "openssl dhparam -out {{dir}}/mnt/etc/nginx/ssl/dhparam.pem 32"
+  shell: "openssl dhparam -out {{dir}}/mnt/etc/nginx/ssl/dhparam.pem 4096"
   when: dhparam.stat.exists == false
 
 - name: Setup nginx configs
