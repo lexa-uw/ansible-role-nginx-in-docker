@@ -1,0 +1,24 @@
+---
+galaxy_info:
+  author: Alexey Tishkov
+  description: Install Nginx in Docker container.
+  license: MIT
+  min_ansible_version: 2.5
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    version:
+    - all
+  - name: CentOS
+    version:
+    - all
+  galaxy_tags:
+    - nginx
+    - docker
+    - ssl
+    - tsl
+
+dependencies: []
+
