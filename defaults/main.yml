@@ -1,12 +1,12 @@
+nginx_container_name: nginx
 nginx:
   allow: []
-  container_name: nginx
   container:
     image: "nginx:alpine"
     expose: []
     log_driver: "syslog"
     log_options:
-      tag: "{{nginx.container_name}}"
+      tag: "{{nginx_container_name}}"
     ports:
       - 443:443
       - 80:80

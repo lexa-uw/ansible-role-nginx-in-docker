@@ -33,7 +33,7 @@
   register: nginx
   docker_container:
     image: "{{nginx.container.image}}"
-    name: "{{nginx.container_name}}"
+    name: "{{nginx_container_name}}"
     pull: yes
     state: started
     user: root
