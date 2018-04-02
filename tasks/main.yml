@@ -40,7 +40,7 @@
     ports:
       - "{{nginx.container.ports.https}}:443"
       - "{{nginx.container.ports.http}}:80"
-    volumes: "{{nginx.docker_container_volumes}} + [
+    volumes: "{{nginx.container.volumes}} + [
         '{{nginx.dir}}/mnt/etc/nginx/conf.d:/etc/nginx/conf.d:ro',
         '{{nginx.dir}}/mnt/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro',
         '{{nginx.dir}}/mnt/etc/nginx/ssl:/etc/nginx/ssl:ro',
