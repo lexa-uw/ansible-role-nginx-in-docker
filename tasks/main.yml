@@ -32,14 +32,15 @@
 - name: Run nginx server
   register: nginx
   docker_container:
-    image: "nginx:alpine"
-    name: "nginx"
+    image: "{{nginx.container.image}}"
+    name: "{{nginx.container_name}}"
     pull: yes
     state: started
     user: root
-    ports:
-      - "{{nginx.container.ports.https}}:443"
-      - "{{nginx.container.ports.http}}:80"
+    log_driver: "{{nginx.container.log_driver}}"
+    log_options: "{{nginx.container.log_options}}"
+    ports: "{{nginx.container.ports}}"
+    expose: '{{nginx.container.expose}}'
     volumes: "{{nginx.container.volumes}} + [
         '{{nginx.dir}}/etc/nginx/conf.d:/etc/nginx/conf.d:ro',
         '{{nginx.dir}}/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro',

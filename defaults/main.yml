@@ -1,10 +1,16 @@
 nginx:
   allow: []
+  container_name: nginx
   container:
+    image: "nginx:alpine"
+    expose: []
+    log_driver: "syslog"
+    log_options:
+      tag: "{{nginx.container_name}}"
     ports:
-      http: 80
-      https: 443
+      - 443:443
+      - 80:80
     volumes: []
-  dir: "{{ ansible_env.HOME }}/docker/nginx"
+  dir: "/tmp/nginx"
   htpasswd: []
   openssl_dhparam_numbits: 4096
