@@ -1,16 +1,15 @@
 nginx_container_name: nginx
-nginx:
-  allow: []
-  container:
-    image: "nginx:alpine"
-    expose: []
-    log_driver: "syslog"
-    log_options:
-      tag: "{{nginx_container_name}}"
-    ports:
-      - 443:443
-      - 80:80
-    volumes: []
-  dir: "/tmp/nginx"
-  htpasswd: []
-  openssl_dhparam_numbits: 4096
+nginx_allow: []
+nginx_dir: "/tmp/nginx"
+nginx_htpasswd: []
+nginx_openssl_dhparam_numbits: 4096
+nginx_container_options:
+  image: "nginx:alpine"
+  expose: []
+  log_driver: "syslog"
+  log_options:
+    tag: "{{nginx_container_name}}"
+  ports:
+    - 443:443
+    - 80:80
+  volumes: []

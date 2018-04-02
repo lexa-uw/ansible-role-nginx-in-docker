@@ -11,6 +11,8 @@
       provision_docker_use_docker_connection: true
 
 - hosts: [docker]
+  vars:
+    nginx_openssl_dhparam_numbits: 8
   tasks:
     - ping:
     - name: Run on scratch

@@ -3,7 +3,7 @@
 auth_basic           "Restricted";
 auth_basic_user_file conf.d/htpasswd;
 
-{% for item in nginx.allow %}
+{% for item in nginx_allow %}
 allow {{ item }};
 {% endfor %}
 
