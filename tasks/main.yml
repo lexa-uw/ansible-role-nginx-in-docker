@@ -32,15 +32,17 @@
 - name: Run nginx server
   register: nginx_container_state
   docker_container:
+    expose: '{{nginx_container_options.expose}}'
     image: "{{nginx_container_options.image}}"
-    name: "{{nginx_container_name}}"
-    pull: yes
-    state: started
-    user: root
     log_driver: "{{nginx_container_options.log_driver}}"
     log_options: "{{nginx_container_options.log_options}}"
+    name: "{{nginx_container_name}}"
     ports: "{{nginx_container_options.ports}}"
-    expose: '{{nginx_container_options.expose}}'
+    pull: yes
+    restart: "{{nginx_container_options.restart}}"
+    restart_policy: "{{nginx_container_options.restart_policy}}"
+    state: started
+    user: root
     volumes: "{{nginx_container_options.volumes}} + [
         '{{nginx_dir}}/etc/nginx/conf.d:/etc/nginx/conf.d:ro',
         '{{nginx_dir}}/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro',

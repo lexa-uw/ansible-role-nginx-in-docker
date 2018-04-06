@@ -4,12 +4,14 @@ nginx_dir: "/tmp/nginx"
 nginx_htpasswd: []
 nginx_openssl_dhparam_numbits: 4096
 nginx_container_options:
-  image: "nginx:alpine"
   expose: []
+  image: "nginx:alpine"
   log_driver: "syslog"
+  restart: "no"
+  restart_policy: "on-failure"
+  volumes: []
   log_options:
     tag: "{{nginx_container_name}}"
   ports:
     - 443:443
     - 80:80
-  volumes: []
