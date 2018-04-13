@@ -37,6 +37,7 @@
     log_driver: "{{nginx_container_options.log_driver}}"
     log_options: "{{nginx_container_options.log_options}}"
     name: "{{nginx_container_name}}"
+    network_mode: "{{nginx_container_options.network_mode}}"
     ports: "{{nginx_container_options.ports}}"
     pull: yes
     restart: "{{nginx_container_options.restart}}"
