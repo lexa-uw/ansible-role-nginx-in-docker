@@ -15,7 +15,7 @@ nginx_container_env: {}
 nginx_container_image: "nginx:alpine"
 nginx_container_log_driver: "json-file"
 nginx_container_name: "nginx"
-nginx_container_network_mode: bribge
+nginx_container_network_mode: bridge
 nginx_container_networks: []
 nginx_container_pull: "yes"
 nginx_container_recreate: "no"
