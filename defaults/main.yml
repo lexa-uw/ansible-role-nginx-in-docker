@@ -1,18 +1,31 @@
-nginx_container_name: nginx
+#####################
+### Role options
+#####################
 nginx_allow: []
 nginx_dir: "/tmp/nginx"
+nginx_global_config: "templates/etc/nginx/nginx.conf"
 nginx_htpasswd: []
 nginx_openssl_dhparam_numbits: 4096
-nginx_container_options:
-  expose: []
-  image: "nginx:alpine"
-  log_driver: "syslog"
-  network_mode: bridge
-  restart: "no"
-  restart_policy: "on-failure"
-  volumes: []
-  log_options:
-    tag: "{{nginx_container_name}}"
-  ports:
-    - 443:443
-    - 80:80
+
+#####################
+### Container options
+#####################
+nginx_container_command: []
+nginx_container_env: {}
+nginx_container_image: "nginx:alpine"
+nginx_container_log_driver: "json-file"
+nginx_container_name: "nginx"
+nginx_container_network_mode: bribge
+nginx_container_networks: []
+nginx_container_pull: "yes"
+nginx_container_recreate: "no"
+nginx_container_restart_policy: "always"
+nginx_container_restart: "no"
+nginx_container_state: "started"
+nginx_container_volumes: []
+nginx_container_log_options: {
+  labels: "{{ nginx_container_name }}",
+}
+nginx_container_ports:
+  - 443:443
+  - 80:80

@@ -1,16 +1,16 @@
 - name: Prepare directories for shared folders
   file:
-    path: "{{item}}"
+    path: "{{ item }}"
     state: directory
   with_items:
-    - "{{nginx_dir}}/etc/nginx/conf.d"
-    - "{{nginx_dir}}/etc/nginx/ssl"
-    - "{{nginx_dir}}/var/log/nginx"
-    - "{{nginx_dir}}/var/www/html"
+    - "{{ nginx_dir }}/etc/nginx/conf.d"
+    - "{{ nginx_dir }}/etc/nginx/ssl"
+    - "{{ nginx_dir }}/var/log/nginx"
+    - "{{ nginx_dir }}/var/www/html"
 
 - name: Check dhparam key
   stat:
-    path: "{{nginx_dir}}/etc/nginx/ssl/dhparam.pem"
+    path: "{{ nginx_dir }}/etc/nginx/ssl/dhparam.pem"
   register: dhparam
 
 - name: Diffie-Hellman parameter for DHE ciphersuites
@@ -18,31 +18,36 @@
   when: dhparam.stat.exists == false
 
 - name: Setup nginx configs
-  register: config
   template:
-    src: "templates/etc/nginx/{{item}}"
-    dest: "{{nginx_dir}}/etc/nginx/{{item}}"
+    src: "templates/etc/nginx/{{ item }}"
+    dest: "{{ nginx_dir }}/etc/nginx/{{ item }}"
   with_items:
     - conf.d/htpasswd
     - conf.d/restricted
-    - nginx.conf
+
+- name: Setup global nginx config
+  template:
+    src: "{{ nginx_global_config }}"
+    dest: "{{ nginx_dir }}/etc/nginx/nginx.conf"
   notify:
     - Restart nginx
 
 - name: Run nginx server
-  register: nginx_container_state
   docker_container:
-    expose: '{{nginx_container_options.expose}}'
-    image: "{{nginx_container_options.image}}"
-    log_driver: "{{nginx_container_options.log_driver}}"
-    log_options: "{{nginx_container_options.log_options}}"
-    name: "{{nginx_container_name}}"
-    network_mode: "{{nginx_container_options.network_mode}}"
-    ports: "{{nginx_container_options.ports}}"
-    pull: yes
-    restart: "{{nginx_container_options.restart}}"
-    restart_policy: "{{nginx_container_options.restart_policy}}"
-    state: started
+    command: "{{ nginx_container_command }}"
+    env: "{{ nginx_container_env }}"
+    image: "{{ nginx_container_image }}"
+    log_driver: "{{ nginx_container_log_driver }}"
+    log_options: "{{ nginx_container_log_options }}"
+    name: "{{ nginx_container_name }}"
+    networks: "{{ nginx_container_networks }}"
+    network_mode: "{{ nginx_container_network_mode }}"
+    ports: "{{ nginx_container_ports }}"
+    pull: "{{ nginx_container_pull }}"
+    recreate: "{{ nginx_container_recreate }}"
+    restart_policy: "{{ nginx_container_restart_policy }}"
+    restart: "{{ nginx_container_restart }}"
+    state: "{{ nginx_container_state }}"
     user: root
     volumes: "{{nginx_container_options.volumes}} + [
         '{{nginx_dir}}/etc/nginx/conf.d:/etc/nginx/conf.d:ro',
