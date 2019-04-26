@@ -59,7 +59,7 @@ Add role to project:
 Add role into your requirements(_requirements.yml_ for example):
 ```yaml
 - src: https://github.com/lexa-uw/ansible-role-nginx-in-docker
-  version: v1.3.0
+  version: v2.0.0
   name: nginx
 ```
 
@@ -76,7 +76,6 @@ Playbook example:
 
 Inside `vars/main.yml`
 ```yaml
-nginx_container_name: my-own-nginx-container
 nginx_allow:
   - "127.0.0.1"
   - "1.1.1.1"
